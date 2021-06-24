@@ -1,4 +1,4 @@
-import key from "./config";
+import key from "../config";
 
 const myKey = key;
 
