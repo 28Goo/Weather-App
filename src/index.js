@@ -1,4 +1,6 @@
-const APIKEY = '8630a15e4ffb404cbbd110931212406';
+import key from "./config";
+
+const myKey = key;
 
 const form = document.querySelector('.location-form');
 const input = document.getElementById('location');
@@ -9,7 +11,7 @@ form.addEventListener('submit', e => {
 })
 
 async function fetchData() {
-    const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${APIKEY}&q=${input.value}`, {mode: 'cors'});
+    const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${myKey}&q=${input.value}`, {mode: 'cors'});
     return response.json();
 }
 
