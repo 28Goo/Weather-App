@@ -1,4 +1,4 @@
-import key from "../config";
+import key from "../../config";
 
 const APIKEY = key;
 const input = document.getElementById('query-location');
@@ -19,7 +19,7 @@ async function getLocation() {
     return location;
 }
 
-async function fetchData(location) {
+async function getWeather(location) {
     const response = await fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${location.coords.lat}&lon=${location.coords.lon}&exclude=minutely&units=metric&appid=${APIKEY}`, {mode: 'cors'});
     return response.json();
 }
@@ -48,4 +48,4 @@ function getDailyWeather(data) {
     return data.daily;
 }
 
-export { fetchData, getLocation, getCurrentWeather, getDailyWeather };
+export { getLocation, getWeather, getCurrentWeather, getDailyWeather };

@@ -1,3 +1,3 @@
-import submitInput from "./user-interface";
+import renderAll from "./Modules/user-interface";
 
-document.addEventListener('DOMContentLoaded', submitInput);
+document.addEventListener('DOMContentLoaded', renderAll);
