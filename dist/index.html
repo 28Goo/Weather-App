@@ -12,9 +12,22 @@
         <div class="navbar">
             <span>Weather App</span>
             <form class="location-form">
-                <label for="location"></label>
-                <input type="text" id="location" name="location" placeholder="Enter City" autofocus required>
+                <label for="query-location"></label>
+                <input type="text" id="query-location" name="location" placeholder="Enter City" autofocus required>
             </form>
+        </div>
+        <h2 class="current-weather-description"></h2>
+        <div class="current-weather">
+            <div class="current-top">
+                <span class="current-date"></span>
+                <span class="location"></span>    
+            </div>
+            <h1 class="current-temp"></h1>
+            <div class="current-bottom">
+                <span class="current-feels-like"></span>
+                <span class="current-wind"></span>
+                <span class="current-humidity"></span>
+            </div>
         </div>
     </header>
     <script src="main.js"></script>
