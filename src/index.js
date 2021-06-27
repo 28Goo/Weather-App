@@ -1,3 +1,6 @@
-import renderAll from "./Modules/user-interface";
+import { renderAll, showWeather } from "./Modules/user-interface";
 
-document.addEventListener('DOMContentLoaded', renderAll);
+document.addEventListener('DOMContentLoaded', () => {
+    showWeather();
+    renderAll();
+} );

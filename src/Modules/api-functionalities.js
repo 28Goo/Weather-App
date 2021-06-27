@@ -2,6 +2,7 @@ import key from "../../config";
 
 const APIKEY = key;
 const input = document.getElementById('query-location');
+input.value = 'Manila';
 
 async function getLocation() {
     const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${APIKEY}`, {mode: 'cors'});
@@ -32,7 +33,7 @@ function getCurrentWeather(data) {
         },
         temperature: {
             temp: data.current.temp,
-            feelsLike: data.current.feels_like
+            feelsLike: data.current.feels_like,
         },
         condition: {
             description: data.current.weather[0].description,
