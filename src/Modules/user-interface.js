@@ -1,14 +1,5 @@
 import { getLocation ,getWeather, getCurrentWeather, getDailyWeather } from './api-functionalities';
-
-
-function capitalizeFirstLetter(string) {
-    let words = string.split(' ');
-    for (let i = 0; i < words.length; i++) {
-        words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-    }
-    return words.join(' ');
-}
-
+import { capitalizeFirstLetter, resetInput, resetContainer } from './misc-functions'
 // TODOS
 function showCurrentWeather(current, daily, location) {
     // Select All Necessary Elements
@@ -33,7 +24,8 @@ function showCurrentWeather(current, daily, location) {
 }
 
 function showWeatherTomorrow(data, location) {
-    console.log('Weather Tomorrow: ', data[1]);
+    // Make data easier to access
+    const tomorrow = data[1];
 
     // Select All Necessary Elements
     const dt = document.querySelector('.tomorrow-date');
@@ -47,8 +39,7 @@ function showWeatherTomorrow(data, location) {
     const wind = document.querySelector('.tomorrow-wind');
     const humidity = document.querySelector('.tomorrow-humidity');
 
-    const tomorrow = data[1];
-
+    // Display Data
     dt.textContent = new Date(tomorrow.dt * 1000).toLocaleDateString('en', { weekday: 'long', });
     place.textContent = location.place.city;
     weatherDescription.textContent = tomorrow.weather[0].description;
@@ -94,16 +85,6 @@ function renderAll() {
             console.error(error);
         }); 
     });
-}
-
-function resetInput() {
-    const input = document.getElementById('query-location');
-    input.placeholder = input.value;
-    input.value = null;
-}
-
-function resetContainer(container) {
-    container.innerHTML = null;
 }
 
 export { renderAll, showWeather }
