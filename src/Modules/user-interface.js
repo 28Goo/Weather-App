@@ -1,7 +1,5 @@
 import { getLocation ,getWeather, getCurrentWeather, getDailyWeather } from './api-functionalities';
 
-const form = document.querySelector('.location-form');
-const input = document.getElementById('query-location');
 
 function capitalizeFirstLetter(string) {
     let words = string.split(' ');
@@ -12,39 +10,62 @@ function capitalizeFirstLetter(string) {
 }
 
 // TODOS
-function showCurrentWeather(current, location) {
+function showCurrentWeather(current, daily, location) {
     // Select All Necessary Elements
     const dt = document.querySelector('.current-date');
-    const place = document.querySelector('.location');
+    const place = document.querySelector('.current-location');
     const weatherDescription = document.querySelector('.current-weather-description');
     const currentTemp = document.querySelector('.current-temp');
-    const wind = document.querySelector('.wind');
-    const feelsLike = document.querySelector('.feels-like');
-    const humidity = document.querySelector('.humidity');
+    const pop = document.querySelector('.current-pop');
+    const feelsLike = document.querySelector('.current-feels-like');
+    const wind = document.querySelector('.current-wind');
+    const humidity = document.querySelector('.current-humidity');
 
     // Display Data
     dt.textContent = new Date(current.dt * 1000).toLocaleDateString('en', { weekday: 'long', });
     place.textContent = location.place.city;
-    currentTemp.textContent = `${current.temperature.temp}°C`;
-    feelsLike.textContent = `${current.temperature.feelsLike}°C`;
     weatherDescription.textContent = capitalizeFirstLetter(current.condition.description);
+    currentTemp.textContent = `${current.temperature.temp}°C`;
+    pop.textContent = `${daily[0].pop}%`
+    feelsLike.textContent = `${current.temperature.feelsLike}°C`;
     wind.textContent = current.wind;
-    humidity.textContent = current.humidity;
+    humidity.textContent = `${current.humidity}%`;
 }
 
-function showWeatherTomorrow(data) {
-    const container = document.querySelector('.weather-tomorrow');
-    console.log(data[0]);
-    
-    const weatherTomorrow = document.createElement('div');
-    weatherTomorrow.textContent = data[0].temp.day;
-    container.appendChild(weatherTomorrow);
+function showWeatherTomorrow(data, location) {
+    console.log('Weather Tomorrow: ', data[1]);
+
+    // Select All Necessary Elements
+    const dt = document.querySelector('.tomorrow-date');
+    const place = document.querySelector('.tomorrow-location');
+    const weatherDescription = document.querySelector('.tomorrow-weather-description');
+    const tempDay = document.querySelector('.tomorrow-temp-day');
+    const tempNight = document.querySelector('.tomorrow-temp-night');
+    const pop = document.querySelector('.tomorrow-pop');
+    const feelsLikeDay = document.querySelector('.tomorrow-feels-like-day');
+    const feelsLikeNight = document.querySelector('.tomorrow-feels-like-night');
+    const wind = document.querySelector('.tomorrow-wind');
+    const humidity = document.querySelector('.tomorrow-humidity');
+
+    const tomorrow = data[1];
+
+    dt.textContent = new Date(tomorrow.dt * 1000).toLocaleDateString('en', { weekday: 'long', });
+    place.textContent = location.place.city;
+    weatherDescription.textContent = tomorrow.weather[0].description;
+    tempDay.textContent = `${tomorrow.temp.day}°C`;
+    tempNight.textContent = `${tomorrow.temp.night}°C`;
+    pop.textContent = `${tomorrow.pop}%`;
+    feelsLikeDay.textContent = `${tomorrow.feels_like.day}°C`;
+    feelsLikeNight.textContent = `${tomorrow.feels_like.night}°C`;
+    wind.textContent = tomorrow.wind_speed;
+    humidity.textContent = `${tomorrow.humidity}%`;
 }
 
 function showDailyWeather(days) {
     const container = document.querySelector('.daily-weather-container');
-    for (let i = 1; i < days.length; i++) {
-        console.log(i, days[i]);
+    resetContainer(container);
+    for (let i = 2; i < days.length; i++) {
+        console.log('Daily', i, days[i]);
         
         const dailyWeather = document.createElement('div');
         dailyWeather.classList.add('daily-weather');
@@ -58,16 +79,15 @@ async function showWeather() {
     const data = await getWeather(location).catch(error => { console.error(error) });
     const currentWeather = await getCurrentWeather(data).catch(error => { console.error(error) });
     const dailyWeather = await getDailyWeather(data).catch(error => { console.error(error) });
-    console.log('Data: ', data);
     console.log('Current Weather: ', currentWeather);
-    console.log('Daily Weather:' ,dailyWeather);
-    showCurrentWeather(currentWeather, location);
-    showWeatherTomorrow(dailyWeather);
+    showCurrentWeather(currentWeather, dailyWeather, location);
+    showWeatherTomorrow(dailyWeather, location);
     showDailyWeather(dailyWeather);
     resetInput();
 }
 
 function renderAll() {
+    const form = document.querySelector('.location-form');
     form.addEventListener('submit', e => {
         e.preventDefault();
         showWeather().catch(error => {
@@ -77,8 +97,13 @@ function renderAll() {
 }
 
 function resetInput() {
+    const input = document.getElementById('query-location');
     input.placeholder = input.value;
     input.value = null;
+}
+
+function resetContainer(container) {
+    container.innerHTML = null;
 }
 
 export { renderAll, showWeather }
