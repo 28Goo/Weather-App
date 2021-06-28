@@ -3,3 +3,15 @@
     padding: 0px;
     box-sizing: border-box;
 }
+
+.current-weather {
+    background-color: aqua;
+}
+
+.weather-tomorrow {
+    background-color: cornflowerblue;
+}
+
+.daily-weather-container {
+    background-color: rgb(152, 98, 202);
+}

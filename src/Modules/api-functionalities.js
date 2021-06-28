@@ -2,6 +2,8 @@ import key from "../../config";
 
 const APIKEY = key;
 const input = document.getElementById('query-location');
+
+// Set Default Place
 input.value = 'Manila';
 
 async function getLocation() {
