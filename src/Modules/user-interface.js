@@ -14,6 +14,7 @@ function capitalizeFirstLetter(string) {
 // TODOS
 function showCurrentWeather(current, location) {
     // Select All Necessary Elements
+    const dt = document.querySelector('.current-date');
     const place = document.querySelector('.location');
     const weatherDescription = document.querySelector('.current-weather-description');
     const currentTemp = document.querySelector('.current-temp');
@@ -22,6 +23,7 @@ function showCurrentWeather(current, location) {
     const humidity = document.querySelector('.humidity');
 
     // Display Data
+    dt.textContent = new Date(current.dt * 1000).toLocaleDateString('en', { weekday: 'long', });
     place.textContent = location.place.city;
     currentTemp.textContent = `${current.temperature.temp}°C`;
     feelsLike.textContent = `${current.temperature.feelsLike}°C`;
@@ -30,16 +32,25 @@ function showCurrentWeather(current, location) {
     humidity.textContent = current.humidity;
 }
 
+function showWeatherTomorrow(data) {
+    const container = document.querySelector('.weather-tomorrow');
+    console.log(data[0]);
+    
+    const weatherTomorrow = document.createElement('div');
+    weatherTomorrow.textContent = data[0].temp.day;
+    container.appendChild(weatherTomorrow);
+}
+
 function showDailyWeather(days) {
     const container = document.querySelector('.daily-weather-container');
-    days.forEach(day => {
-        console.log(day);
+    for (let i = 1; i < days.length; i++) {
+        console.log(i, days[i]);
         
         const dailyWeather = document.createElement('div');
         dailyWeather.classList.add('daily-weather');
-        dailyWeather.textContent = day.temp.day;
+        dailyWeather.textContent = days[i].temp.day;
         container.appendChild(dailyWeather);
-    })
+    }
 }
 
 async function showWeather() {
@@ -51,6 +62,7 @@ async function showWeather() {
     console.log('Current Weather: ', currentWeather);
     console.log('Daily Weather:' ,dailyWeather);
     showCurrentWeather(currentWeather, location);
+    showWeatherTomorrow(dailyWeather);
     showDailyWeather(dailyWeather);
     resetInput();
 }

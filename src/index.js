@@ -1,6 +1,6 @@
 import { renderAll, showWeather } from "./Modules/user-interface";
 
 document.addEventListener('DOMContentLoaded', () => {
-    showWeather();
+    showWeather().catch(error => {console.error(error)});
     renderAll();
 } );

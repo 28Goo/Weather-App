@@ -21,7 +21,7 @@ async function getLocation() {
 }
 
 async function getWeather(location) {
-    const response = await fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${location.coords.lat}&lon=${location.coords.lon}&exclude=minutely&units=metric&appid=${APIKEY}`, {mode: 'cors'});
+    const response = await fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${location.coords.lat}&lon=${location.coords.lon}&exclude=minutely,hourly&units=metric&appid=${APIKEY}`, {mode: 'cors'});
     return response.json();
 }
 
@@ -39,6 +39,7 @@ async function getCurrentWeather(data) {
             description: data.current.weather[0].description,
             icon: data.current.weather[0].icon
         },
+        dt: data.current.dt,
         wind: data.current.wind_speed,
         humidity: data.current.humidity,
     }

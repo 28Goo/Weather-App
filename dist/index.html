@@ -9,31 +9,44 @@
 </head>
 <body>
     <header>
+        <form class="location-form">
+            <label for="query-location"></label>
+            <input type="text" id="query-location" name="location" placeholder="Enter City" autofocus required>
+        </form>
         <div class="navbar">
-            <span>Weather App</span>
-            <form class="location-form">
-                <label for="query-location"></label>
-                <input type="text" id="query-location" name="location" placeholder="Enter City" autofocus required>
-            </form>
+            <a href="#">Today</a>
+            <a href="#">Tomorrow</a>
+            <a href="#">7 Days</a>
         </div>
     </header>
     <main>
-        <h2 class="current-weather-description"></h2>
-        <div class="current-weather">
-            <div class="current-top">
-                <span class="current-date"></span>
+        <div class="current-weather weather-container">
+            <h2 class="current-weather-description weather-description"></h2>
+            <div class="weather-top">
+                <span class="current-date date"></span>
                 <span class="location"></span>    
             </div>
             <h1 class="current-temp temp"></h1>
-            <div class="current-bottom">
-                <p class="current-feels-like">Feels Like: <span class="feels-like temp"></span></p>
-                <p class="current-wind">Wind: <span class="wind"></span></p>
-                <p class="current-humidity">Humidity: <span class="humidity"></span></p>
+            <div class="weather-bottom">
+                <p class="feels-like-container">Feels Like: <span class="current-feels-like feels-like"></span></p>
+                <p class="wind-container">Wind: <span class="current-wind wind"></span></p>
+                <p class="humidity-container">Humidity: <span class="current-humidity humidity"></span></p>
             </div>
         </div>
-        <div class="daily-weather-container">
-
+        <div class="weather-tomorrow weather-container">
+            <h2 class="tomorrow-weather-description weather-description"></h2>
+            <div class="weather-top">
+                <span class="tomorrow-date date"></span>
+                <span class="location"></span>    
+            </div>
+            <h1 class="tomorrow-temp temp"></h1>
+            <div class="weather-bottom">
+                <p class="feels-like-container">Feels Like: <span class="tomorrow-feels-like feels-like"></span></p>
+                <p class="wind-container">Wind: <span class="tomorrow-wind wind"></span></p>
+                <p class="humidity-container">Humidity: <span class="tomorrow-humidity humidity"></span></p>
+            </div>
         </div>
+        <div class="daily-weather-container"></div>
     </main>
     <script src="main.js"></script>
 </body>
