@@ -30,22 +30,29 @@ function showCurrentWeather(current, location) {
     humidity.textContent = current.humidity;
 }
 
-// function showDailyWeather() {
-    // unit = unitChecker(unit);
-// }
+function showDailyWeather(days) {
+    const container = document.querySelector('.daily-weather-container');
+    days.forEach(day => {
+        console.log(day);
+        
+        const dailyWeather = document.createElement('div');
+        dailyWeather.classList.add('daily-weather');
+        dailyWeather.textContent = day.temp.day;
+        container.appendChild(dailyWeather);
+    })
+}
 
 async function showWeather() {
-    const location = await getLocation();
-    const data = await getWeather(location).catch(error => {
-        console.error(error);
-    });
-    if (data.error) return;
-    const currentWeather = getCurrentWeather(data);
-    const dailyWeather = getDailyWeather(data);
-    console.log(data);
+    const location = await getLocation().catch(error => { console.error(error) });
+    const data = await getWeather(location).catch(error => { console.error(error) });
+    const currentWeather = await getCurrentWeather(data).catch(error => { console.error(error) });
+    const dailyWeather = await getDailyWeather(data).catch(error => { console.error(error) });
+    console.log('Data: ', data);
+    console.log('Current Weather: ', currentWeather);
     console.log('Daily Weather:' ,dailyWeather);
     showCurrentWeather(currentWeather, location);
-    resetInput();   
+    showDailyWeather(dailyWeather);
+    resetInput();
 }
 
 function renderAll() {

@@ -25,7 +25,7 @@ async function getWeather(location) {
     return response.json();
 }
 
-function getCurrentWeather(data) {
+async function getCurrentWeather(data) {
     const currentWeather = {
         weather: {
             weatherCondition: data.current.weather[0].main,
@@ -45,7 +45,7 @@ function getCurrentWeather(data) {
     return currentWeather;
 }
 
-function getDailyWeather(data) {
+async function getDailyWeather(data) {
     return data.daily;
 }
 
