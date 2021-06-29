@@ -4,8 +4,21 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: rgb(240, 240, 240);
+}
+
+:root {
+    --default-font:'Poppins', sans-serif;
+    --current-container-width: 350px;
+}
+
 .current-weather {
     background-color: aqua;
+}
+
+.current-weather-details {
+    background-color: white;
 }
 
 .weather-tomorrow {
@@ -15,3 +28,108 @@
 .daily-weather-container {
     background-color: rgb(152, 98, 202);
 }
+
+.location-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#query-location {
+    border-radius: 6px;
+}
+
+/* Phones */
+@media screen and (min-width: 320px) {
+    * {
+        font-family: var(--default-font);
+    }
+
+    body {
+        padding: 5px;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .location-form {
+        margin: 15px 0px 30px 0px;
+    }
+
+    #query-location {
+        font-size: .9rem;
+        padding: 3px 3px 3px 10px;
+    }
+
+    .current-weather {
+        position: relative;
+        height: 200px;
+        width: var(--current-container-width);
+        border-radius: 30px;
+    }
+
+    .current-weather-description {
+        position: absolute;
+        top: 40%;
+        left: 5%;
+    }
+
+    .weather-date-location {
+        position: absolute;
+        left: 5%;
+        bottom: 15%;
+    }
+
+    .temp-container {
+        position: absolute;
+        top: 20%;
+        right: 5%;
+        text-align: end;
+    }
+
+    .current-temp {
+        font-size: 2rem;
+    }
+
+    .feels-like-container {
+        font-size: .7rem;
+    }
+
+    .current-weather-details {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 15px 0px 15px 0px;
+        padding: 20px;
+        width: var(--current-container-width);
+        border-radius: 20px;
+    }
+
+    .pop-container, .wind-container, .humidity-container {
+        margin: 0px 20px 0px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: .7rem;
+    }
+}
+
+/* Tablets */
+@media screen and (min-width: 480px) {
+}
+
+/* Small Screens */
+@media screen and (min-width: 760px) {
+
+}
+
+/* Desktops */
+@media screen and (min-width: 1200px) {
+
+}
+

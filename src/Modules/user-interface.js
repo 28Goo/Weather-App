@@ -21,7 +21,7 @@ function showCurrentWeather(current, daily, location) {
     currentTemp.textContent = `${current.temperature.temp}°C`;
     pop.textContent = `${daily[0].pop}%`
     feelsLike.textContent = `${current.temperature.feelsLike}°C`;
-    wind.textContent = current.wind;
+    wind.textContent = `${current.wind}m/s`;
     humidity.textContent = `${current.humidity}%`;
 }
 
@@ -50,7 +50,7 @@ function showWeatherTomorrow(data) {
     pop.textContent = `${tomorrow.pop}%`;
     feelsLikeDay.textContent = `${tomorrow.feels_like.day}°C`;
     feelsLikeNight.textContent = `${tomorrow.feels_like.night}°C`;
-    wind.textContent = tomorrow.wind_speed;
+    wind.textContent = `${tomorrow.wind_speed}m/s`;
     humidity.textContent = `${tomorrow.humidity}%`;
 }
 
@@ -59,7 +59,6 @@ function showDailyWeather(days) {
     resetContainer(container);
 
     for (let i = 2; i < days.length; i++) {
-        console.log('Daily', i, days[i]);
         // Make data easier to access
         const day = days[i];
         
@@ -115,7 +114,6 @@ async function showWeather() {
     const dailyWeather = await getDailyWeather(data).catch(error => { console.error(error) });
     
     // Show Organized Weather Data
-    console.log(location.place);
     showCurrentWeather(currentWeather, dailyWeather, location);
     showWeatherTomorrow(dailyWeather, location);
     showDailyWeather(dailyWeather);

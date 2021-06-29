@@ -5,45 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
     <title>Weather App</title>
 </head>
 <body>
     <header>
         <form class="location-form">
             <label for="query-location"></label>
-            <input type="text" id="query-location" name="location" placeholder="Enter City" autofocus required>
+            <input type="text" id="query-location" name="location" placeholder="Enter City" required>
+            <button type="submit">Search</button>
         </form>
     </header>
     <main>
         <div class="current-weather weather-container">
-            <img class="current-icon" src="" alt="icon">
+            <img class="current-icon icon" src="" alt="icon">
             <h2 class="current-weather-description weather-description"></h2>
-            <div class="weather-top">
+            <div class="weather-date-location">
                 <p class="current-date date"></p>
                 <p class="current-location location"></span>    
             </div>
-            <h1 class="current-temp temp"></h1>
-            <div class="weather-bottom">
-                <div class="pop-container">Chance of Rain: <span class="current-pop pop"></span></div>
+            <div class="temp-container">
+                <h1 class="current-temp temp"></h1>
                 <div class="feels-like-container">Feels Like: <span class="current-feels-like feels-like"></span></div>
-                <div class="wind-container">Wind: <span class="current-wind wind"></span></div>
-                <div class="humidity-container">Humidity: <span class="current-humidity humidity"></span></div>
             </div>
         </div>
+        <div class="current-weather-details">
+            <div class="wind-container">Wind: <span class="current-wind wind"></span></div>
+            <div class="pop-container">Chance of Rain: <span class="current-pop pop"></span></div>
+            <div class="humidity-container">Humidity: <span class="current-humidity humidity"></span></div>
+        </div>
+
         <div class="weather-tomorrow weather-container">
-            <img class="tomorrow-icon" src="" alt="icon">
+            <img class="tomorrow-icon icon" src="" alt="icon">
             <h2 class="tomorrow-weather-description weather-description"></h2>
-            <div class="weather-top">
+            <div class="weather-date">
                 <p class="tomorrow-date date"></p>  
             </div>
-            <h1 class="tomorrow-temp-day temp"></h1>
-            <h2 class="tomorrow-temp-night temp"></h2>
-            <div class="weather-bottom">
+            <div class="tomorrow-temp-container">
+                <h1 class="tomorrow-temp-day temp"></h1>
+                <h2 class="tomorrow-temp-night temp"></h2>
+            </div>
+            <div class="feels-like-container">Feels Like: 
+                <span class="tomorrow-feels-like-day feels-like"></span>
+                <span class="tomorrow-feels-like-night feels-like"></span>
+            </div>
+            <div class="weather-details">
                 <div class="pop-container">Chance of Rain: <span class="tomorrow-pop pop"></span></div>
-                <div class="feels-like-container">Feels Like: 
-                    <span class="tomorrow-feels-like-day feels-like"></span>
-                    <span class="tomorrow-feels-like-night feels-like"></span>
-                </div>
                 <div class="wind-container">Wind: <span class="tomorrow-wind wind"></span></div>
                 <div class="humidity-container">Humidity: <span class="tomorrow-humidity humidity"></span></div>
             </div>
