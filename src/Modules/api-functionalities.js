@@ -6,8 +6,8 @@ async function getLocation() {
     // Set Default Place
     const input = document.getElementById('query-location');
     input.value = 'Manila';
-    
-    const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${APIKEY}`, {mode: 'cors'});
+
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${APIKEY}`, {mode: 'cors'});
     const data = await response.json();
     const location = {
         coords : {
@@ -23,7 +23,7 @@ async function getLocation() {
 }
 
 async function getWeather(location) {
-    const response = await fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${location.coords.lat}&lon=${location.coords.lon}&exclude=minutely,hourly&units=metric&appid=${APIKEY}`, {mode: 'cors'});
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${location.coords.lat}&lon=${location.coords.lon}&exclude=minutely,hourly&units=metric&appid=${APIKEY}`, {mode: 'cors'});
     return response.json();
 }
 
