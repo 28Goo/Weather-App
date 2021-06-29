@@ -25,76 +25,50 @@ function showCurrentWeather(current, daily, location) {
     humidity.textContent = `${current.humidity}%`;
 }
 
-function showWeatherTomorrow(data) {
-    // Make data easier to access
-    const tomorrow = data[1];
-
-    // Select All Necessary Elements
-    const icon = document.querySelector('.tomorrow-icon');
-    const date = document.querySelector('.tomorrow-date');
-    const weatherDescription = document.querySelector('.tomorrow-weather-description');
-    const tempDay = document.querySelector('.tomorrow-temp-day');
-    const tempNight = document.querySelector('.tomorrow-temp-night');
-    const pop = document.querySelector('.tomorrow-pop');
-    const feelsLikeDay = document.querySelector('.tomorrow-feels-like-day');
-    const feelsLikeNight = document.querySelector('.tomorrow-feels-like-night');
-    const wind = document.querySelector('.tomorrow-wind');
-    const humidity = document.querySelector('.tomorrow-humidity');
-
-    // Add Source and Text Content
-    icon.src = `http://openweathermap.org/img/wn/${tomorrow.weather[0].icon}@2x.png`;
-    date.textContent = new Date(tomorrow.dt * 1000).toLocaleDateString('en', { weekday: 'long', });
-    weatherDescription.textContent = capitalizeFirstLetter(tomorrow.weather[0].description);
-    tempDay.textContent = `${tomorrow.temp.day}°C`;
-    tempNight.textContent = `${tomorrow.temp.night}°C`;
-    pop.textContent = `${tomorrow.pop}%`;
-    feelsLikeDay.textContent = `${tomorrow.feels_like.day}°C`;
-    feelsLikeNight.textContent = `${tomorrow.feels_like.night}°C`;
-    wind.textContent = `${tomorrow.wind_speed}m/s`;
-    humidity.textContent = `${tomorrow.humidity}%`;
-}
-
 function showDailyWeather(days) {
     const container = document.querySelector('.daily-weather-container');
     resetContainer(container);
 
-    for (let i = 2; i < days.length; i++) {
+    for (let i = 1; i < days.length; i++) {
         // Make data easier to access
         const day = days[i];
         
-        // Create Elements
+        // Create Containers
         const dailyWeather = document.createElement('div');
-        const icon = document.createElement('img');
+        const dateContainer = document.createElement('div');
+        const iconContainer = document.createElement('div');
+        const tempContainer = document.createElement('div');
+
+        // Create Elements Inside Containers
         const date = document.createElement('p');
-        const weatherDescription = document.createElement('p');
+        const icon = document.createElement('img');
         const tempDay = document.createElement('p');
         const tempNight = document.createElement('p');
-        const pop = document.createElement('p');
 
         // Add Class to Elements
         dailyWeather.classList.add('daily-weather');
-        icon.classList.add('daily-icon');
+        dateContainer.classList.add('daily-date-container');
+        iconContainer.classList.add('daily-icon-container');
+        tempContainer.classList.add('daily-temp-container');
         date.classList.add('daily-date');
-        weatherDescription.classList.add('daily-weather-description');
+        icon.classList.add('daily-icon');
         tempDay.classList.add('daily-temp-day');
         tempNight.classList.add('daily-temp-night');
-        pop.classList.add('daily-pop');
         
         // Add Source Text Content
-        icon.src = `http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
         date.textContent = new Date(day.dt * 1000).toLocaleDateString('en', { weekday: 'long', });
-        weatherDescription.textContent = capitalizeFirstLetter(day.weather[0].description);
-        tempDay.textContent = `${day.temp.day}°C`;
-        tempNight.textContent = `${day.temp.night}°C`;
-        pop.textContent = `${day.pop}%`;
+        icon.src = `http://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
+        tempDay.textContent = `${day.temp.day}°`;
+        tempNight.textContent = `${day.temp.night}°`;
 
         // Append Elements to Container
-        dailyWeather.appendChild(icon);
-        dailyWeather.appendChild(date);
-        dailyWeather.appendChild(weatherDescription);
-        dailyWeather.appendChild(tempDay);
-        dailyWeather.appendChild(tempNight);
-        dailyWeather.appendChild(pop);
+        dailyWeather.appendChild(dateContainer);
+        dailyWeather.appendChild(iconContainer);
+        dailyWeather.appendChild(tempContainer);
+        dateContainer.appendChild(date);
+        iconContainer.appendChild(icon);
+        tempContainer.appendChild(tempDay);
+        tempContainer.appendChild(tempNight);
         container.appendChild(dailyWeather);
     }
 }
@@ -115,7 +89,6 @@ async function showWeather() {
     
     // Show Organized Weather Data
     showCurrentWeather(currentWeather, dailyWeather, location);
-    showWeatherTomorrow(dailyWeather, location);
     showDailyWeather(dailyWeather);
 
     resetInput(location);
