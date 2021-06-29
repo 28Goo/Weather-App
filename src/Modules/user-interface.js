@@ -3,6 +3,7 @@ import { capitalizeFirstLetter, resetInput, resetContainer } from './misc-functi
 
 function showCurrentWeather(current, daily, location) {
     // Select All Necessary Elements
+    const icon = document.querySelector('.current-icon');
     const date = document.querySelector('.current-date');
     const place = document.querySelector('.current-location');
     const weatherDescription = document.querySelector('.current-weather-description');
@@ -13,6 +14,7 @@ function showCurrentWeather(current, daily, location) {
     const humidity = document.querySelector('.current-humidity');
 
     // Add Text Content
+    icon.src = `http://openweathermap.org/img/wn/${current.condition.icon}@2x.png`;
     date.textContent = new Date(current.dt * 1000).toLocaleDateString('en', { weekday: 'long', });
     place.textContent = `${location.place.city}, ${location.place.country}`;
     weatherDescription.textContent = capitalizeFirstLetter(current.condition.description);
@@ -28,6 +30,7 @@ function showWeatherTomorrow(data) {
     const tomorrow = data[1];
 
     // Select All Necessary Elements
+    const icon = document.querySelector('.tomorrow-icon');
     const date = document.querySelector('.tomorrow-date');
     const weatherDescription = document.querySelector('.tomorrow-weather-description');
     const tempDay = document.querySelector('.tomorrow-temp-day');
@@ -38,7 +41,8 @@ function showWeatherTomorrow(data) {
     const wind = document.querySelector('.tomorrow-wind');
     const humidity = document.querySelector('.tomorrow-humidity');
 
-    // Add Text Content
+    // Add Source and Text Content
+    icon.src = `http://openweathermap.org/img/wn/${tomorrow.weather[0].icon}@2x.png`;
     date.textContent = new Date(tomorrow.dt * 1000).toLocaleDateString('en', { weekday: 'long', });
     weatherDescription.textContent = capitalizeFirstLetter(tomorrow.weather[0].description);
     tempDay.textContent = `${tomorrow.temp.day}°C`;
@@ -61,6 +65,7 @@ function showDailyWeather(days) {
         
         // Create Elements
         const dailyWeather = document.createElement('div');
+        const icon = document.createElement('img');
         const date = document.createElement('p');
         const weatherDescription = document.createElement('p');
         const tempDay = document.createElement('p');
@@ -69,13 +74,15 @@ function showDailyWeather(days) {
 
         // Add Class to Elements
         dailyWeather.classList.add('daily-weather');
+        icon.classList.add('daily-icon');
         date.classList.add('daily-date');
         weatherDescription.classList.add('daily-weather-description');
         tempDay.classList.add('daily-temp-day');
         tempNight.classList.add('daily-temp-night');
         pop.classList.add('daily-pop');
         
-        // Add Text Content
+        // Add Source Text Content
+        icon.src = `http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
         date.textContent = new Date(day.dt * 1000).toLocaleDateString('en', { weekday: 'long', });
         weatherDescription.textContent = capitalizeFirstLetter(day.weather[0].description);
         tempDay.textContent = `${day.temp.day}°C`;
@@ -83,6 +90,7 @@ function showDailyWeather(days) {
         pop.textContent = `${day.pop}%`;
 
         // Append Elements to Container
+        dailyWeather.appendChild(icon);
         dailyWeather.appendChild(date);
         dailyWeather.appendChild(weatherDescription);
         dailyWeather.appendChild(tempDay);
