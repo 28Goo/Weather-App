@@ -14,7 +14,7 @@ function showCurrentWeather(current, daily, location) {
     const humidity = document.querySelector('.current-humidity');
 
     // Add Text Content
-    icon.src = `http://openweathermap.org/img/wn/${current.condition.icon}@2x.png`;
+    icon.src = `https://openweathermap.org/img/wn/${current.condition.icon}@2x.png`;
     date.textContent = new Date(current.dt * 1000).toLocaleDateString('en', { weekday: 'long', });
     place.textContent = `${location.place.city}, ${location.place.country}`;
     weatherDescription.textContent = capitalizeFirstLetter(current.condition.description);
@@ -57,7 +57,7 @@ function showDailyWeather(days) {
         
         // Add Source Text Content
         date.textContent = new Date(day.dt * 1000).toLocaleDateString('en', { weekday: 'long', });
-        icon.src = `http://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
+        icon.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
         tempDay.textContent = `${day.temp.day}°`;
         tempNight.textContent = `${day.temp.night}°`;
 
