@@ -1,11 +1,12 @@
 import key from "../../config";
 
-const APIKEY = key;
+const APIKEY = key;    
+
+// Set Default Place
+const input = document.getElementById('query-location');
+input.value = 'Manila';
 
 async function getLocation() {
-    // Set Default Place
-    const input = document.getElementById('query-location');
-    input.value = 'Manila';
 
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${APIKEY}`, {mode: 'cors'});
     const data = await response.json();
