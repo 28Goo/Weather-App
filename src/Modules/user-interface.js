@@ -63,7 +63,7 @@ function showDailyWeather(days) {
         
         // Add Source Text Content
         date.textContent = new Date(day.dt * 1000).toLocaleDateString('en', { weekday: 'long', });
-        icon.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
+        icon.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
         humidity.textContent = `${day.humidity}`;
         pop.textContent = `${day.pop}`;
         tempDay.textContent = `${day.temp.day}°`;
@@ -103,7 +103,7 @@ async function showWeather() {
     showCurrentWeather(currentWeather, dailyWeather, location);
     showDailyWeather(dailyWeather);
 
-    console.log(dailyWeather);
+    console.log(data);
 
     resetInput(location);
 }

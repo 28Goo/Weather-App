@@ -10,15 +10,20 @@ body {
 
 :root {
     --default-font:'Poppins', sans-serif;
-    --current-container-width: 350px;
+    --current-container-width: 90%;
+    --current-weather-margin: 15px;
+    --current-weather-details-margin: 15px 0px 15px 0px;
 }
 
 .current-weather {
     background-color: aqua;
+    width: var(--current-container-width);
+    margin-top: var(--current-weather-margin);
 }
 
 .current-weather-details {
     background-color: white;
+    margin: var(--current-weather-details-margin);
 }
 
 .weather-tomorrow {
@@ -30,13 +35,26 @@ body {
 }
 
 .location-form {
+    padding-top: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#query-location {
+    border-radius: 30px;
+    width: 90%;
+}
+
 /* Phones */
-@media screen and (min-width: 320px) {
+@media screen and (min-width: 280px) {
     * {
         font-family: var(--default-font);
     }
@@ -48,14 +66,9 @@ body {
         justify-content: center;
     }
 
-    .location-form {
-        margin: 10px 0px 20px 0px;
-    }
-
     #query-location {
         font-size: .9rem;
         padding: 3px 3px 3px 10px;
-        border-radius: 6px;
     }
 
     #submit-button {
@@ -70,7 +83,6 @@ body {
     .current-weather {
         position: relative;
         height: 230px;
-        width: var(--current-container-width);
         border-radius: 30px;
     }
 
@@ -106,7 +118,7 @@ body {
         align-items: center;
         justify-content: center;
         height: 80px;
-        margin: 15px 0px 15px 0px;
+        margin: var(--current-weather-margin);
         padding: 5px;
         width: var(--current-container-width);
         border-radius: 20px;
@@ -132,7 +144,7 @@ body {
         display: flex;
         align-items: center;
         justify-content: space-evenly;
-        margin: 5px 0px 5px 0px;
+        margin: 5.6px 0px 5.6px 0px;
         font-size: .8rem;
     }
 
@@ -155,14 +167,54 @@ body {
         margin: 0px 3px 0px 3px;
     }
     
+    .daily-icon {
+        height: 50px;
+    }
     
 }
 
 /* Tablets */
 @media screen and (min-width: 480px) {
+    #query-location {
+        font-size: 1.1rem;
+        border-radius: 30px;
+    }
+
+    #submit-button {
+        font-size: 1rem;
+    }
+
+    .current-weather {
+        height: 300px;
+    }
+
+    .current-icon {
+        margin-left: 10px;
+    }
+
+    .current-weather-details {
+        height: 150px;
+        width: 90%;
+        justify-content: space-evenly;
+    }
+
+    .wind-container, .pop-container, .humidity-container {
+        font-size: 1rem;
+    }
 
     .daily-weather-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
         border-radius: 0;
+    }
+
+    .daily-date-container, 
+    .daily-icon-container, 
+    .daily-temp-container {
+        margin: 3px 0px 3px 0px;
+        font-size: 1rem;
     }
 
     .daily-humidity-container, 
@@ -171,17 +223,30 @@ body {
         align-items: center;
         justify-content: center;
         width: 100%;
+        font-size: 1rem;
     }
 
-}
-
-/* Small Screens */
-@media screen and (min-width: 760px) {
+    .daily-icon {
+        height: 70px;
+    }
 
 }
 
 /* Desktops */
 @media screen and (min-width: 1200px) {
+    .current-icon {
+        position: absolute;
+        top: 8%;
+        left: 3%;
+        transform: translate(-10%, -10%);
+    }
 
+    .daily-weather-container {
+        height: 100%;
+    }
+
+    .daily-icon {
+        height: 100%;
+    }
 }
 
