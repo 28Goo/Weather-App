@@ -136,12 +136,20 @@ body {
         font-size: .8rem;
     }
 
-    .daily-date-container, .daily-icon-container, .daily-temp-container {
+    .daily-date-container, 
+    .daily-icon-container, 
+    .daily-temp-container {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
     }
+
+    .daily-humidity-container, 
+    .daily-pop-container {
+        display: none;
+    }
+
 
     .daily-temp-container p {
         margin: 0px 3px 0px 3px;
@@ -152,6 +160,19 @@ body {
 
 /* Tablets */
 @media screen and (min-width: 480px) {
+
+    .daily-weather-container {
+        border-radius: 0;
+    }
+
+    .daily-humidity-container, 
+    .daily-pop-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
 }
 
 /* Small Screens */
