@@ -37,11 +37,15 @@ function showDailyWeather(days) {
         const dailyWeather = document.createElement('div');
         const dateContainer = document.createElement('div');
         const iconContainer = document.createElement('div');
+        const humidityContainer = document.createElement('div');
+        const popContainer = document.createElement('div'); 
         const tempContainer = document.createElement('div');
 
         // Create Elements Inside Containers
         const date = document.createElement('p');
         const icon = document.createElement('img');
+        const humidity = document.createElement('p');
+        const pop = document.createElement('p');
         const tempDay = document.createElement('p');
         const tempNight = document.createElement('p');
 
@@ -49,6 +53,8 @@ function showDailyWeather(days) {
         dailyWeather.classList.add('daily-weather');
         dateContainer.classList.add('daily-date-container');
         iconContainer.classList.add('daily-icon-container');
+        humidityContainer.classList.add('daily-humidity-container');
+        popContainer.classList.add('daily-pop-container');
         tempContainer.classList.add('daily-temp-container');
         date.classList.add('daily-date');
         icon.classList.add('daily-icon');
@@ -58,15 +64,21 @@ function showDailyWeather(days) {
         // Add Source Text Content
         date.textContent = new Date(day.dt * 1000).toLocaleDateString('en', { weekday: 'long', });
         icon.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
+        humidity.textContent = `${day.humidity}`;
+        pop.textContent = `${day.pop}`;
         tempDay.textContent = `${day.temp.day}°`;
         tempNight.textContent = `${day.temp.night}°`;
 
         // Append Elements to Container
         dailyWeather.appendChild(dateContainer);
         dailyWeather.appendChild(iconContainer);
+        dailyWeather.appendChild(humidityContainer);
+        dailyWeather.appendChild(popContainer);
         dailyWeather.appendChild(tempContainer);
         dateContainer.appendChild(date);
         iconContainer.appendChild(icon);
+        humidityContainer.appendChild(humidity);
+        popContainer.appendChild(pop);
         tempContainer.appendChild(tempDay);
         tempContainer.appendChild(tempNight);
         container.appendChild(dailyWeather);
@@ -90,6 +102,8 @@ async function showWeather() {
     // Show Organized Weather Data
     showCurrentWeather(currentWeather, dailyWeather, location);
     showDailyWeather(dailyWeather);
+
+    console.log(dailyWeather);
 
     resetInput(location);
 }
