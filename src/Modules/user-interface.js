@@ -1,18 +1,19 @@
 import { getLocation ,getWeather, getCurrentWeather, getDailyWeather } from './api-functionalities';
 import { capitalizeFirstLetter, resetInput, resetContainer } from './misc-functions'
 
-function changeBg(data) {
+function changeBg(data, container) {
     if (data.weather[0].main === 'Thunderstorm') {
-        console.log('Thunderstorm');
+        container.style.backgroundColor = 'rgb(24, 22, 49)';
     }
     else if (data.weather[0].main === 'Drizzle') {
-        console.log('Drizzle');
+        container.style.backgroundColor = 'rgb(86, 82, 136)';
     }
     else if (data.weather[0].main === 'Rain') {
-        console.log('Rain');
+        container.style.backgroundColor = 'rgb(55, 48, 150)';
     }
     else if (data.weather[0].main === 'Snow') {
-        console.log('Snow');
+        container.style.backgroundColor = 'rgb(171, 169, 196)';
+        container.style.color = 'black';
     }
     else if (data.weather[0].main === 'Mist' || 
             data.weather[0].main === 'Smoke' || 
@@ -23,19 +24,24 @@ function changeBg(data) {
             data.weather[0].main === 'Ash' ||
             data.weather[0].main === 'Squall' ||
             data.weather[0].main === 'Tornado') {
-        console.log('Atmosphere');
+                container.style.backgroundColor = 'rgb(135, 134, 153)';
     }
     else if (data.weather[0].main === 'Clear') {
-        console.log('Clear');
+        container.style.backgroundColor = 'rgb(75, 130, 212)';
+        container.style.color = 'whie';
     }
     else {
-        console.log('Clouds');
+        container.style.backgroundColor = 'white';
+        container.style.color = 'black';
     }
 
 }
 
 function showCurrentWeather(current, daily, location) {
-    changeBg(current);
+    // Change Background Depending on Weather
+    const container = document.querySelector('.current-weather');
+    changeBg(current, container);
+    
     // Select All Necessary Elements
     const icon = document.querySelector('.current-icon');
     const date = document.querySelector('.current-date');
@@ -129,6 +135,9 @@ function showDailyWeather(days) {
         bottomContainer.appendChild(detailsContainer);
         bottomContainer.appendChild(tempContainer);
         container.appendChild(dailyWeather);
+
+        // Change Background Depending on Weather
+        changeBg(day, dailyWeather);
     }
 }
 
