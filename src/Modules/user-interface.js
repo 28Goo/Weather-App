@@ -4,12 +4,15 @@ import { capitalizeFirstLetter, resetInput, resetContainer } from './misc-functi
 function changeBg(data, container) {
     if (data.weather[0].main === 'Thunderstorm') {
         container.style.backgroundColor = 'rgb(24, 22, 49)';
+        container.style.color = 'white';
     }
     else if (data.weather[0].main === 'Drizzle') {
         container.style.backgroundColor = 'rgb(86, 82, 136)';
+        container.style.color = 'black';
     }
     else if (data.weather[0].main === 'Rain') {
         container.style.backgroundColor = 'rgb(55, 48, 150)';
+        container.style.color = 'white';
     }
     else if (data.weather[0].main === 'Snow') {
         container.style.backgroundColor = 'rgb(171, 169, 196)';
@@ -25,10 +28,11 @@ function changeBg(data, container) {
             data.weather[0].main === 'Squall' ||
             data.weather[0].main === 'Tornado') {
                 container.style.backgroundColor = 'rgb(135, 134, 153)';
+                container.style.color = 'white';
     }
     else if (data.weather[0].main === 'Clear') {
         container.style.backgroundColor = 'rgb(75, 130, 212)';
-        container.style.color = 'whie';
+        container.style.color = 'white';
     }
     else {
         container.style.backgroundColor = 'white';
