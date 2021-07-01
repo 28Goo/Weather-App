@@ -9,16 +9,17 @@ body {
 }
 
 :root {
-    --default-font:'Poppins', sans-serif;
+    --default-font:'Product Sans', sans-serif;
     --current-container-width: 90%;
     --current-weather-margin: 15px;
     --current-weather-details-margin: 15px 0px 15px 0px;
 }
 
 .current-weather {
-    background-color: aqua;
+    background-color: rgb(0, 192, 192);
     width: var(--current-container-width);
     margin-top: var(--current-weather-margin);
+    color: white;
 }
 
 .current-weather-details {
@@ -30,10 +31,6 @@ body {
     background-color: cornflowerblue;
 }
 
-.daily-weather-container {
-    background-color: rgb(152, 98, 202);
-}
-
 .location-form {
     padding-top: 10px;
     display: flex;
@@ -42,16 +39,73 @@ body {
 }
 
 .input-container {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
 }
 
+.search-icon {
+    position: absolute;
+    left: 5.7%;
+}
+
 #query-location {
+    border: 1px solid gray;
     border-radius: 30px;
     width: 90%;
+    padding: 3px 3px 3px 40px;
 }
+
+.daily-weather-container {
+    display: grid;
+    place-content: center;
+}
+
+.daily-weather {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(60deg, rgb(146, 31, 146), rgb(65, 11, 65));
+    margin: 10px;
+    border-radius: 20px;
+    color: white;
+}
+
+.daily-bottom-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 75%;
+}
+
+.daily-date {
+    font-weight: 800;
+}
+
+.daily-temp-day {
+    position: absolute;
+    top: -15%;
+    right: 0%;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.daily-wind-container, .daily-pop-container {
+    display: flex;
+    align-items: center;
+    font-size: 0.7rem;
+}
+
+.daily-weather span {
+    font-size: 15px;
+    margin-right: 5px;
+}
+
+
 
 /* Phones */
 @media screen and (min-width: 280px) {
@@ -66,18 +120,13 @@ body {
         justify-content: center;
     }
 
+    .search-icon {
+        left: 8%;
+    }
+    
+
     #query-location {
         font-size: .9rem;
-        padding: 3px 3px 3px 10px;
-    }
-
-    #submit-button {
-        font-size: .8rem;
-        padding: 7px;
-        border-radius: 6px;
-        border: none;
-        color: white;
-        background-color: #eb6f4c;
     }
 
     .current-weather {
@@ -134,54 +183,30 @@ body {
     }
 
     .daily-weather-container {
+        grid-template-columns: repeat(2, 50%);
         width: 100%;
-        border-top-left-radius: 30px;
-        border-top-right-radius: 30px;
-        padding: 10px;
+        padding: 0px 10px 10px 10px;
     }
 
     .daily-weather {
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        margin: 5.6px 0px 5.6px 0px;
+        height: 150px;
         font-size: .8rem;
     }
 
-    .daily-date-container, 
-    .daily-icon-container, 
-    .daily-temp-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .daily-humidity-container, 
-    .daily-pop-container {
-        display: none;
-    }
-
-
-    .daily-temp-container p {
-        margin: 0px 3px 0px 3px;
-    }
-    
     .daily-icon {
         height: 50px;
     }
-    
 }
 
 /* Tablets */
 @media screen and (min-width: 480px) {
+    .search-icon {
+        left: 6.5%;
+    }
+
     #query-location {
         font-size: 1.1rem;
         border-radius: 30px;
-    }
-
-    #submit-button {
-        font-size: 1rem;
     }
 
     .current-weather {
@@ -203,26 +228,20 @@ body {
     }
 
     .daily-weather-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        height: 100%;
-        border-radius: 0;
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        width: 100%;
+    }
+
+    .daily-weather {
+        height: 200px;
+        width: 200px;
     }
 
     .daily-date-container, 
     .daily-icon-container, 
     .daily-temp-container {
         margin: 3px 0px 3px 0px;
-        font-size: 1rem;
-    }
-
-    .daily-humidity-container, 
-    .daily-pop-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
         font-size: 1rem;
     }
 
@@ -234,15 +253,67 @@ body {
 
 /* Desktops */
 @media screen and (min-width: 1200px) {
+    .location-form {
+        margin-top: 30px;
+    }
+
+    .search-icon {
+        left: 5.5%;
+    }
+
+    #query-location {
+        font-size: 1.5rem;
+    }
+
     .current-icon {
         position: absolute;
-        top: 8%;
-        left: 3%;
+        top: 10%;
+        left: 5%;
         transform: translate(-10%, -10%);
     }
 
+    .current-weather {
+        height: 500px;
+        margin-top: 30px;
+        font-size: 2rem;
+    }
+
+    .current-temp {
+        font-size: 5rem;
+    }
+
+    .feels-like-container {
+        font-size: 1.3rem;
+    }
+
+    .current-weather-details {
+        margin-top: 30px;
+    }
+
+    .wind-container, .pop-container, .humidity-container {
+        font-size: 1.5rem;
+    }
+
     .daily-weather-container {
-        height: 100%;
+        display: flex;
+        margin-top: 30px;
+    }
+
+    .daily-weather {
+        height: 300px;
+        width: 250px;
+    }
+    
+    .daily-date {
+        font-size: 1.5rem;
+    }
+
+    .daily-wind-container, .daily-pop-container {
+        font-size: 1rem;
+    }
+
+    .daily-temp-day {
+        font-size: 2rem;
     }
 
     .daily-icon {
