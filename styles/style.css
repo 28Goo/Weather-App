@@ -18,7 +18,6 @@ body {
 .current-weather {
     width: var(--current-container-width);
     margin-top: var(--current-weather-margin);
-    color: white;
 }
 
 .current-weather-details {
@@ -69,7 +68,6 @@ body {
     justify-content: center;
     margin: 10px;
     border-radius: 20px;
-    color: white;
 }
 
 .daily-bottom-container {
