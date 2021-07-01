@@ -29,24 +29,7 @@ async function getWeather(location) {
 }
 
 async function getCurrentWeather(data) {
-    const currentWeather = {
-        weather: {
-            weatherCondition: data.current.weather[0].main,
-            weatherDescrition: data.current.weather[0].description
-        },
-        temperature: {
-            temp: data.current.temp,
-            feelsLike: data.current.feels_like,
-        },
-        condition: {
-            description: data.current.weather[0].description,
-            icon: data.current.weather[0].icon
-        },
-        dt: data.current.dt,
-        wind: data.current.wind_speed,
-        humidity: data.current.humidity,
-    }
-    return currentWeather;
+    return data.current;
 }
 
 async function getDailyWeather(data) {

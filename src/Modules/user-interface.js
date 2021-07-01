@@ -1,7 +1,41 @@
 import { getLocation ,getWeather, getCurrentWeather, getDailyWeather } from './api-functionalities';
 import { capitalizeFirstLetter, resetInput, resetContainer } from './misc-functions'
 
+function changeBg(data) {
+    if (data.weather[0].main === 'Thunderstorm') {
+        console.log('Thunderstorm');
+    }
+    else if (data.weather[0].main === 'Drizzle') {
+        console.log('Drizzle');
+    }
+    else if (data.weather[0].main === 'Rain') {
+        console.log('Rain');
+    }
+    else if (data.weather[0].main === 'Snow') {
+        console.log('Snow');
+    }
+    else if (data.weather[0].main === 'Mist' || 
+            data.weather[0].main === 'Smoke' || 
+            data.weather[0].main === 'Haze' || 
+            data.weather[0].main === 'Dust' ||
+            data.weather[0].main === 'Fog' ||
+            data.weather[0].main === 'Sand' ||
+            data.weather[0].main === 'Ash' ||
+            data.weather[0].main === 'Squall' ||
+            data.weather[0].main === 'Tornado') {
+        console.log('Atmosphere');
+    }
+    else if (data.weather[0].main === 'Clear') {
+        console.log('Clear');
+    }
+    else {
+        console.log('Clouds');
+    }
+
+}
+
 function showCurrentWeather(current, daily, location) {
+    changeBg(current);
     // Select All Necessary Elements
     const icon = document.querySelector('.current-icon');
     const date = document.querySelector('.current-date');
@@ -14,14 +48,14 @@ function showCurrentWeather(current, daily, location) {
     const humidity = document.querySelector('.current-humidity');
 
     // Add Text Content
-    icon.src = `https://openweathermap.org/img/wn/${current.condition.icon}@2x.png`;
+    icon.src = `https://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`;
     date.textContent = new Date(current.dt * 1000).toLocaleDateString('en', { weekday: 'long', });
     place.textContent = `${location.place.city}, ${location.place.country}`;
-    weatherDescription.textContent = capitalizeFirstLetter(current.condition.description);
-    currentTemp.textContent = `${current.temperature.temp}°C`;
-    pop.textContent = `${daily[0].pop}%`
-    feelsLike.textContent = `${current.temperature.feelsLike}°C`;
-    wind.textContent = `${current.wind}m/s`;
+    weatherDescription.textContent = capitalizeFirstLetter(current.weather[0].description);
+    currentTemp.textContent = `${parseInt(current.temp)}°C`;
+    pop.textContent = `${daily[0].pop * 100}%`
+    feelsLike.textContent = `${parseInt(current.feels_like)}°C`;
+    wind.textContent = `${current.wind_speed}m/s`;
     humidity.textContent = `${current.humidity}%`;
 }
 
@@ -29,7 +63,7 @@ function showDailyWeather(days) {
     const container = document.querySelector('.daily-weather-container');
     resetContainer(container);
 
-    for (let i = 1; i < days.length; i++) {
+    for (let i = 1; i < days.length - 1; i++) {
         // Make data easier to access
         const day = days[i];
         
@@ -37,50 +71,63 @@ function showDailyWeather(days) {
         const dailyWeather = document.createElement('div');
         const dateContainer = document.createElement('div');
         const iconContainer = document.createElement('div');
-        const humidityContainer = document.createElement('div');
+        const bottomContainer = document.createElement('div');
+        const detailsContainer = document.createElement('div');
+        const windContainer = document.createElement('div');
         const popContainer = document.createElement('div'); 
         const tempContainer = document.createElement('div');
 
         // Create Elements Inside Containers
         const date = document.createElement('p');
         const icon = document.createElement('img');
-        const humidity = document.createElement('p');
+        const windIcon = document.createElement('span');
+        const popIcon = document.createElement('span');
+        const wind = document.createElement('p');
         const pop = document.createElement('p');
         const tempDay = document.createElement('p');
-        const tempNight = document.createElement('p');
 
         // Add Class to Elements
         dailyWeather.classList.add('daily-weather');
         dateContainer.classList.add('daily-date-container');
         iconContainer.classList.add('daily-icon-container');
-        humidityContainer.classList.add('daily-humidity-container');
+        bottomContainer.classList.add('daily-bottom-container');
+        detailsContainer.classList.add('daily-details-container');
+        windContainer.classList.add('daily-wind-container');
         popContainer.classList.add('daily-pop-container');
         tempContainer.classList.add('daily-temp-container');
         date.classList.add('daily-date');
         icon.classList.add('daily-icon');
+        windIcon.classList.add('material-icons');
+        popIcon.classList.add('material-icons');
         tempDay.classList.add('daily-temp-day');
-        tempNight.classList.add('daily-temp-night');
         
         // Add Source Text Content
         date.textContent = new Date(day.dt * 1000).toLocaleDateString('en', { weekday: 'long', });
         icon.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
-        humidity.textContent = `${day.humidity}`;
-        pop.textContent = `${day.pop}`;
-        tempDay.textContent = `${day.temp.day}°`;
-        tempNight.textContent = `${day.temp.night}°`;
+        windIcon.textContent = 'air'
+        popIcon.textContent = 'water_drop';
+        wind.textContent = `${day.wind_speed}m/s`;
+        pop.textContent = `${day.pop * 100}%`;
+        tempDay.textContent = `${parseInt(day.temp.day)}°`;
 
         // Append Elements to Container
         dailyWeather.appendChild(dateContainer);
         dailyWeather.appendChild(iconContainer);
-        dailyWeather.appendChild(humidityContainer);
+        dailyWeather.appendChild(bottomContainer);
+        dailyWeather.appendChild(windContainer);
         dailyWeather.appendChild(popContainer);
         dailyWeather.appendChild(tempContainer);
         dateContainer.appendChild(date);
         iconContainer.appendChild(icon);
-        humidityContainer.appendChild(humidity);
-        popContainer.appendChild(pop);
+        windContainer.appendChild(windIcon);
+        windContainer.appendChild(wind);
         tempContainer.appendChild(tempDay);
-        tempContainer.appendChild(tempNight);
+        popContainer.appendChild(popIcon);
+        popContainer.appendChild(pop);
+        detailsContainer.appendChild(windContainer);
+        detailsContainer.appendChild(popContainer);
+        bottomContainer.appendChild(detailsContainer);
+        bottomContainer.appendChild(tempContainer);
         container.appendChild(dailyWeather);
     }
 }
@@ -91,7 +138,7 @@ async function showWeather() {
     
     if (!location) {
         alert('Cannot Find Location.');
-        resetInput(location);
+        resetInput();
         return;
     }
 
@@ -105,7 +152,7 @@ async function showWeather() {
 
     console.log(data);
 
-    resetInput(location);
+    resetInput();
 }
 
 function renderAll() {
