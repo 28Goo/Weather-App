@@ -163,8 +163,6 @@ async function showWeather() {
     showCurrentWeather(currentWeather, dailyWeather, location);
     showDailyWeather(dailyWeather);
 
-    console.log(data);
-
     resetInput();
 }
 
