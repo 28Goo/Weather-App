@@ -146,12 +146,13 @@ function showDailyWeather(days) {
 }
 
 async function showWeather() {
+    const input = document.getElementById('query-location')
     // Get Data from Async Functions
-    const location = await getLocation().catch(error => { console.error(error) });
+    const location = await getLocation(input).catch(error => { console.error(error) });
     
     if (!location) {
         alert('Cannot Find Location.');
-        resetInput();
+        resetInput(input);
         return;
     }
 
@@ -163,7 +164,7 @@ async function showWeather() {
     showCurrentWeather(currentWeather, dailyWeather, location);
     showDailyWeather(dailyWeather);
 
-    resetInput();
+    resetInput(input);
 }
 
 function renderAll() {

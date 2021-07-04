@@ -6,8 +6,7 @@ function capitalizeFirstLetter(string) {
     return words.join(' ');
 }
 
-function resetInput() {
-    const input = document.getElementById('query-location');
+function resetInput(input) {
     input.value = null;
 }
 
